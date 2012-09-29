@@ -1,4 +1,4 @@
 threaded-chat
 =============
 
-Threaded chat utility
+Threaded chat using node.js and socket.io
