@@ -1,3 +1,4 @@
+require('newrelic');
 
 var http = require('http'),
     io = require('socket.io'),
@@ -18,11 +19,11 @@ var clients = [];
 socket.sockets.on('connection', function(client) {
     clients.push(client);
     client.on('im', function(im) {
-	crypto.randomBytes(8, function(ex, buf) {
-	    im.id = buf.toString('hex');
-	    clients.forEach(function(client) {
-		client.emit('im', im);
-	    });
-	});
+        crypto.randomBytes(8, function(ex, buf) {
+            im.id = buf.toString('hex');
+            clients.forEach(function(client) {
+                client.emit('im', im);
+            });
+        });
     });
 });
