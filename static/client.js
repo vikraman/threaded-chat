@@ -1,4 +1,3 @@
-
 var socket = io.connect();
 var cur_id = null;
 
@@ -14,26 +13,26 @@ socket.on('im', function(im) {
     cur_id = im.id;
     $('#im').attr('placeholder', im.text);
     im_id_el.on('click', function(event) {
-	event.stopPropagation();
-	cur_id = im.id;
-	$('#im').attr('placeholder', im.text);
+        event.stopPropagation();
+        cur_id = im.id;
+        $('#im').attr('placeholder', im.text);
     });
 });
 
 $(function() {
     var im_el = $('#im');
     im_el.on('keypress', function(event) {
-	if(event.keyCode == 13) {
-	    var text = im_el.attr('value');
-	    if(text) {
-		var im = {'dt': new Date(),
-			  'text': text,
-			  'parent': cur_id
-			 };
-		socket.emit('im', im);
-		im_el.attr('value', '');
-		im_el.focus();
-	    }
-	}
+        if(event.keyCode == 13) {
+            var text = im_el.val();
+            if(text) {
+                var im = {'dt': new Date(),
+                          'text': text,
+                          'parent': cur_id
+                         };
+                socket.emit('im', im);
+                im_el.attr('value', '');
+                im_el.focus();
+            }
+        }
     });
 });
